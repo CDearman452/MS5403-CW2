@@ -47,8 +47,8 @@ public class CDM_TopDownPC : MonoBehaviour
         // Update vector2 representing mouse position to reflect the mouses screen position converted to cartesian coordinates
         v2_mousePos = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
 
-        v2_posDif = v2_mousePos - new Vector2(transform.position.x, transform.position.y); // Calculate the distance between PC and the mouse position
-        fl_angle = Mathf.Atan2(v2_posDif.y, v2_posDif.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(fl_angle, Vector3.forward);
+        v2_posDif = v2_mousePos - new Vector2(transform.position.x, transform.position.y); // Calculate the difference in x and y between the PC and the mouse position
+        fl_angle = Mathf.Atan2(v2_posDif.y, v2_posDif.x) * Mathf.Rad2Deg; // use the difference in x and y to calculate the angle to rotate using pythagoras' theorem and convert it from radions to degrees
+        transform.rotation = Quaternion.AngleAxis(fl_angle, Vector3.forward); // Rotate the PC around the z axis to match the angle calculated above
     }
 }
