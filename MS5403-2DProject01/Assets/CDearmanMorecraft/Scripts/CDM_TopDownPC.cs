@@ -32,6 +32,7 @@ public class CDM_TopDownPC : MonoBehaviour
     {
         PCMove(); // Call the movement function each frame
         PCMouseFollow(); // Call the mouse based rotation function each frame
+        PCProjectile(); // Call the projectiles spawning function
     }
     //----------------------------------------------------------------------------------------------------
     // Simple 2D top-down movement function
@@ -58,6 +59,9 @@ public class CDM_TopDownPC : MonoBehaviour
     // Funtion that causes projectiles to fire when the left mouse button is clicked
     private void PCProjectile()
     {
-
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            
+        }
     }
 }

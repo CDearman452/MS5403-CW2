@@ -2,16 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CDM_TopDownCameraTrack : MonoBehaviour
+public class CDM_TopDownNPCHostile : MonoBehaviour
 {
     //----------------------------------------------------------------------------------------------------
     // Variables
-    public GameObject go_target;
+
+    //----------------------------------------------------------------------------------------------------
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
     //----------------------------------------------------------------------------------------------------
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(go_target.transform.position.x, go_target.transform.position.y, -10);
-        // Set X&Y position to be the same as the target object whilst maintaing Z position
+        
     }
 }

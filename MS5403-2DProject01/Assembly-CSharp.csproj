@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_TopDownCameraTrack.cs" />
+    <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_TopDownNPCHostile.cs" />
     <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_TopDownPC.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
