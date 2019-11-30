@@ -6,7 +6,7 @@ public class CDM_TopDownNPCHostile : MonoBehaviour
 {
     //----------------------------------------------------------------------------------------------------
     // Variables
-
+    public bool bl_hit;
     //----------------------------------------------------------------------------------------------------
     // Start is called before the first frame update
     void Start()
@@ -17,6 +17,10 @@ public class CDM_TopDownNPCHostile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (bl_hit == true)
+        {
+            Debug.Log("Hit");
+            Destroy(gameObject);
+        }
     }
 }

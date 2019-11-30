@@ -62,6 +62,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_TopDownBullet.cs" />
     <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_TopDownCameraTrack.cs" />
     <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_TopDownNPCHostile.cs" />
     <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_TopDownPC.cs" />
