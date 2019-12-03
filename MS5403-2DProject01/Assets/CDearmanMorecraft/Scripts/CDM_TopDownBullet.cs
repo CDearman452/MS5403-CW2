@@ -19,7 +19,7 @@ public class CDM_TopDownBullet : MonoBehaviour
         GetComponent<Rigidbody2D>().freezeRotation = true; // Lock the bullets rotation to stop it from occasionally spinning
     }
     //----------------------------------------------------------------------------------------------------
-    // Called when a collision between two colliders/rigidbodies occurs
+    // Called when a collision between two colliders occurs
     private void OnCollisionStay2D(Collision2D collision)
     {
         // Check if the bullet has hit an enemy, if it has change a variable in the enemies script to reflect this
