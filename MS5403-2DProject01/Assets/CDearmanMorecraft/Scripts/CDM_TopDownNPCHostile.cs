@@ -17,9 +17,16 @@ public class CDM_TopDownNPCHostile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (bl_hit == true)
+        
+    }
+    //----------------------------------------------------------------------------------------------------
+    // Triggers when an object enters this objects collider
+    private void OnTriggerEnter2D(Collider2D l_cl_obj)
+    {
+        if (l_cl_obj.transform.tag == "Bullet")
         {
             Debug.Log("Hit");
+            Destroy(l_cl_obj);
             Destroy(gameObject);
         }
     }

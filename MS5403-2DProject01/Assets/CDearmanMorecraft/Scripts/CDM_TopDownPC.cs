@@ -18,6 +18,8 @@ public class CDM_TopDownPC : MonoBehaviour
     public Vector2 v2_speedCo = new Vector2(5,5);
     public Vector2 v2_sprintSpeedCo = new Vector2(7.5f, 7.5f);
 
+    public Vector3 v3_mouseOffSet;
+
     private float fl_angle;
     private float fl_time;
     private float fl_frameCount;
@@ -63,8 +65,8 @@ public class CDM_TopDownPC : MonoBehaviour
     private void PCMouseFollow()
     {
         //----------------------------------------
-        // Update vector2 representing mouse position to reflect the mouses screen position converted to cartesian coordinates
-        v2_mousePos = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
+        // Update vector2 representing mouse position to reflect the mouses screen position (Modified slightly to correct for custom cursor sprite) converted to cartesian coordinates
+        v2_mousePos = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x + 14, Input.mousePosition.y - 16));
         //----------------------------------------
         v2_posDif = v2_mousePos - new Vector2(transform.position.x, transform.position.y); // Calculate the difference in x and y between the PC and the mouse position
         fl_angle = Mathf.Atan2(v2_posDif.y, v2_posDif.x) * Mathf.Rad2Deg; // Use the difference in x and y to calculate the angle to rotate using pythagoras' theorem and convert it from radions to degrees

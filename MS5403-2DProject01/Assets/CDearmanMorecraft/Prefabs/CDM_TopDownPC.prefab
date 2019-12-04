@@ -103,7 +103,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 041064e93cd65f247aad433700d1be8b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 95a5c3ab3213aeb48a9baf43ab39d96d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -131,6 +131,7 @@ MonoBehaviour:
   v2_posDif: {x: 0, y: 0}
   v2_speedCo: {x: 5, y: 5}
   v2_sprintSpeedCo: {x: 7.5, y: 7.5}
+  v3_mouseOffSet: {x: 0.5, y: 0.5, z: 0}
   fl_cooldown: 0.1
 --- !u!50 &7552537965714125187
 Rigidbody2D:
