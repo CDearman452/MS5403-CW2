@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class CDM_TopDownReticule : MonoBehaviour
 {
+    //----------------------------------------------------------------------------------------------------
+    // Variables
     public Texture2D tx_cursor;
     //----------------------------------------------------------------------------------------------------
     // Start is called before the first frame update
     void Start()
     {
-        //Cursor.visible = false; // Make the cursor invisible
         Cursor.lockState = CursorLockMode.Confined; // Lock the cursor to the game window
-        Cursor.SetCursor(tx_cursor, new Vector2(5,-5), CursorMode.Auto);
+        Cursor.SetCursor(tx_cursor, new Vector2(5,-5), CursorMode.Auto); // Change the cursor sprite to a custom reticule and off-set the cursors active point to center on the reticule.
     }
     //----------------------------------------------------------------------------------------------------
     // Update is called once per frame

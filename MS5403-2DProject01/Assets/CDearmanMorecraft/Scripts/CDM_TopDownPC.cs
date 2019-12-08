@@ -32,8 +32,7 @@ public class CDM_TopDownPC : MonoBehaviour
     {
         //----------------------------------------
         // Set references for object components and gameobjects
-        go_bulletSource = GameObject.Find("PCBulletSource");
-
+        go_bulletSource = GameObject.Find("PCBulletSource"); // Seperate object childed to the PC to identify a position where the bullet can spawn without colliding with the PC
         rb_pc = GetComponent<Rigidbody2D>();
         //----------------------------------------
         // 
@@ -47,8 +46,7 @@ public class CDM_TopDownPC : MonoBehaviour
         PCMove(); // Call the movement function each frame
         PCMouseFollow(); // Call the mouse based rotation function each frame
         PCProjectile(); // Call the projectiles spawning function
-        //----------------------------------------
-        
+        //----------------------------------------  
     }
     //----------------------------------------------------------------------------------------------------
     // Simple 2D top-down movement function
