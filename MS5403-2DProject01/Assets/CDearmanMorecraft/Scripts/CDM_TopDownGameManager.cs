@@ -72,7 +72,7 @@ public class CDM_TopDownGameManager : MonoBehaviour
         in_score = in_time + (in_kills * 5) + (in_items * 2) - (in_damageTaken * 10);
     }
     //----------------------------------------------------------------------------------------------------
-    // Function that governs the end game screen and it's functions
+    // Function that governs the end game screen and its functions
     void GameOver()
     {
         CalcScore(); // Call the score calculation function
