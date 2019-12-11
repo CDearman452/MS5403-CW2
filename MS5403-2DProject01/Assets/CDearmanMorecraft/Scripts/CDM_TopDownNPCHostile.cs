@@ -19,18 +19,21 @@ public class CDM_TopDownNPCHostile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //----------------------------------------
+        // Set references for object components and gameobjects
         go_pc = GameObject.Find("CDM_TopDownPC");
+        //----------------------------------------
     }
     //----------------------------------------------------------------------------------------------------
     // Update is called once per frame
     void Update()
     {
-        v2_posDif = new Vector2(go_pc.transform.position.x - transform.position.x, go_pc.transform.position.y - transform.position.y);
-        if (v2_posDif.x < 10 && v2_posDif.y < 10)
+        v2_posDif = new Vector2(go_pc.transform.position.x - transform.position.x, go_pc.transform.position.y - transform.position.y); // Find the differnce between the PC's and the NPC's position
+        if (v2_posDif.x < 10 && v2_posDif.y < 10) // Check if the difference is less than 10 on the x&y axis in any direction
         {
-            if (v2_posDif.x > 10 && v2_posDif.y > 10) ShortRangeBehaviour();
+            if (v2_posDif.x > 10 && v2_posDif.y > 10) ShortRangeBehaviour(); // If it is, call a behaviour determining function
         }
-        else Pathfind();
+        else Pathfind(); // If it isn't, call the pathfinding function to move towards the PC
     }
     //----------------------------------------------------------------------------------------------------
     // Triggers when an object enters this objects collider
