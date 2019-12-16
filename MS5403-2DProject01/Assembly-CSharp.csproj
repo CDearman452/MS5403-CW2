@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_TopDownBullet.cs" />
+    <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_TopDownBulletNPC.cs" />
     <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_TopDownCameraTrack.cs" />
     <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_TopDownGameManager.cs" />
     <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_TopDownNPCHostile.cs" />

@@ -33,9 +33,8 @@ public class CDM_TopDownPC : MonoBehaviour
         //----------------------------------------
         // Set references for object components and gameobjects
         go_bulletSource = GameObject.Find("PCBulletSource"); // Seperate object childed to the PC to identify a position where the bullet can spawn without colliding with the PC
-        rb_pc = GetComponent<Rigidbody2D>();
+        rb_pc = GetComponent<Rigidbody2D>(); // Assign players rigidbody
         //----------------------------------------
-        // 
     }
     //----------------------------------------------------------------------------------------------------
     // Update is called once per frame
@@ -67,7 +66,7 @@ public class CDM_TopDownPC : MonoBehaviour
         v2_mousePos = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x + 14, Input.mousePosition.y - 16));
         //----------------------------------------
         v2_posDif = v2_mousePos - new Vector2(transform.position.x, transform.position.y); // Calculate the difference in x and y between the PC and the mouse position
-        fl_angle = Mathf.Atan2(v2_posDif.y, v2_posDif.x) * Mathf.Rad2Deg; // Use the difference in x and y to calculate the angle to rotate using pythagoras' theorem and convert it from radions to degrees
+        fl_angle = Mathf.Atan2(v2_posDif.y, v2_posDif.x) * Mathf.Rad2Deg; // Use the difference in x and y to calculate the angle to rotate using trig and convert it from radions to degrees
         transform.rotation = Quaternion.AngleAxis(fl_angle, Vector3.forward); // Rotate the PC around the z axis to match the angle calculated above
         //----------------------------------------
     }
