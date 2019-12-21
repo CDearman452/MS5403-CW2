@@ -7,6 +7,7 @@ public class CDM_TopDownPC : MonoBehaviour
     //----------------------------------------------------------------------------------------------------
     // Variables
     private GameObject go_bulletSource;
+    private GameObject go_gm;
     public GameObject go_bullet;
 
     private Rigidbody2D rb_pc;
@@ -20,9 +21,12 @@ public class CDM_TopDownPC : MonoBehaviour
 
     public Vector3 v3_mouseOffSet;
 
+    private int in_id;
+    public int in_hpMax;
+    public int in_hp;
+
     private float fl_angle;
     private float fl_time;
-    private float fl_frameCount;
     public float fl_cooldown;
 
     private bool bl_fire = false;
@@ -33,8 +37,10 @@ public class CDM_TopDownPC : MonoBehaviour
         //----------------------------------------
         // Set references for object components and gameobjects
         go_bulletSource = GameObject.Find("PCBulletSource"); // Seperate object childed to the PC to identify a position where the bullet can spawn without colliding with the PC
+        go_gm = GameObject.Find("CDM_TopDownGameManager"); // The game manager gameobject
         rb_pc = GetComponent<Rigidbody2D>(); // Assign players rigidbody
         //----------------------------------------
+        in_hp = in_hpMax; // Set the players health to it's maximum
     }
     //----------------------------------------------------------------------------------------------------
     // Update is called once per frame
@@ -45,7 +51,26 @@ public class CDM_TopDownPC : MonoBehaviour
         PCMove(); // Call the movement function each frame
         PCMouseFollow(); // Call the mouse based rotation function each frame
         PCProjectile(); // Call the projectiles spawning function
-        //----------------------------------------  
+        //----------------------------------------
+    }
+    //----------------------------------------------------------------------------------------------------
+    // Function that detects collisions with other objects
+    private void OnCollisionEnter2D(Collision2D _col)
+    {
+        if (_col.transform.tag == "HostileNPC") // Check if the object collided with is an enemy
+        {
+            in_id = 0; // Set an ID value to identify the collision as an enemy
+            HP(); // Call the HP governing function
+        }
+        else if (_col.transform.tag == "HealthPickup")
+        {
+            in_id = 1; // Set an ID value to identify the collision as a health pickup
+            HP(); // Call the HP governing function
+        }
+        else if (_col.transform.tag == "Powerup")
+        {
+            //Do Shit
+        }
     }
     //----------------------------------------------------------------------------------------------------
     // Simple 2D top-down movement function
@@ -83,6 +108,30 @@ public class CDM_TopDownPC : MonoBehaviour
             // Instantiate a new bullet object with a transform shifted forward to avoid hitting the PC and at the same rotation
             Instantiate(go_bullet, new Vector3(go_bulletSource.transform.position.x, go_bulletSource.transform.position.y, 0), Quaternion.AngleAxis(fl_angle, Vector3.forward));
             fl_time = Time.timeSinceLevelLoad + fl_cooldown; // reset cooldown
+        }
+    }
+    //----------------------------------------------------------------------------------------------------
+    // Function that governs the Players Health Points
+    private void HP()
+    {
+        //----------------------------------------
+        // Increase/Decrease health when needed
+        if (in_id == 0) // Check the assigned ID of the collided object to see if it is an enemy
+        {
+            // Calculate the damage dealt to the player with the formula: 1 + Difficulty level multiplied by 1.25 and rounded to the nearest whole number
+            int _in_damage = 1 + Mathf.RoundToInt(go_gm.GetComponent<CDM_TopDownGameManager>().fl_enemyDif * 1.25f);
+            in_hp -= _in_damage; // Apply the damage to the players health
+        }
+        else if (in_id == 1) // Check the assigned ID of the collided object to see if it is a health pickup   
+        {
+            if (in_hp > in_hpMax) in_hp++; // Increase the players health if it is smaller than the hp max
+        }
+        //----------------------------------------
+        // Check if the player dies and end the game
+        if (in_hp <= 0) // Check the players HP
+        {
+            go_gm.GetComponent<CDM_TopDownGameManager>().bl_gameOver = true; // Set bool in game manager to trigger GameOver function
+            gameObject.SetActive(false); // Deactivate the Player Object
         }
     }
 }
