@@ -121,10 +121,12 @@ public class CDM_TopDownPC : MonoBehaviour
             // Calculate the damage dealt to the player with the formula: 1 + Difficulty level multiplied by 1.25 and rounded to the nearest whole number
             int _in_damage = 1 + Mathf.RoundToInt(go_gm.GetComponent<CDM_TopDownGameManager>().fl_enemyDif * 1.25f);
             in_hp -= _in_damage; // Apply the damage to the players health
+            go_gm.GetComponent<CDM_TopDownGameManager>().in_damageTaken += _in_damage; // Increase the int in the game manager that tracks the damage that the player has taken for scoring purposes
         }
         else if (in_id == 1) // Check the assigned ID of the collided object to see if it is a health pickup   
         {
             if (in_hp > in_hpMax) in_hp++; // Increase the players health if it is smaller than the hp max
+            go_gm.GetComponent<CDM_TopDownGameManager>().in_items++;// Increase the int in the game manager that tracks how many items that the player has picked up for scoring purposes
         }
         //----------------------------------------
         // Check if the player dies and end the game

@@ -62,6 +62,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_MainMenu.cs" />
+    <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_PauseManager.cs" />
     <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_TopDownBullet.cs" />
     <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_TopDownBulletNPC.cs" />
     <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_TopDownCameraTrack.cs" />

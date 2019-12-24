@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4497425973663869720}
   - component: {fileID: -2464771690795707580}
+  - component: {fileID: 7234327171867541860}
   m_Layer: 0
   m_Name: CDM_TopDownGameManager
   m_TagString: Untagged
@@ -53,7 +54,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  tx_cursor: {fileID: 2800000, guid: b9a81056c2da12a4e95515d10f27218b, type: 3}
   sp_health:
   - {fileID: -4804592812353288311, guid: b832e7b9d3c34a941aee25643988fc7f, type: 3}
   - {fileID: 34989072961346798, guid: b832e7b9d3c34a941aee25643988fc7f, type: 3}
@@ -61,3 +61,18 @@ MonoBehaviour:
   - {fileID: 3894959783371556785, guid: b832e7b9d3c34a941aee25643988fc7f, type: 3}
   - {fileID: 8693345245351932705, guid: b832e7b9d3c34a941aee25643988fc7f, type: 3}
   bl_gameOver: 0
+--- !u!114 &7234327171867541860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4142361667839601883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 480d809fb558f20449454f523e2702eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  go_pauseMenu: {fileID: 0}
+  tx_cursor01: {fileID: 2800000, guid: b9a81056c2da12a4e95515d10f27218b, type: 3}
+  tx_cursor02: {fileID: 2800000, guid: 103e288700a002d46bf9eb604d31710f, type: 3}

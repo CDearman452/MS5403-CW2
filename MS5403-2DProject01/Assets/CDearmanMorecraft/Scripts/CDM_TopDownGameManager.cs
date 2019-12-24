@@ -24,16 +24,23 @@ public class CDM_TopDownGameManager : MonoBehaviour
 
     private string st_minutes;
     private string st_seconds;
+    private string st_score;
 
     private GameObject go_pc;
     public GameObject[] go_healthIcons;
+    public GameObject go_gameOverScreen;
+    public GameObject go_scoreText;
+    public GameObject go_highscore01;
+    public GameObject go_highscore02;
+    public GameObject go_highscore03;
+    public GameObject go_highscore04;
+    public GameObject go_highscore05;
 
     private TextMeshProUGUI tmp_timeText;
 
-    public Texture2D tx_cursor;
-
     public Sprite[] sp_health;
 
+    private bool bl_check = false;
     public bool bl_gameOver;
     //----------------------------------------------------------------------------------------------------
     // Start is called before the first frame update
@@ -41,13 +48,11 @@ public class CDM_TopDownGameManager : MonoBehaviour
     {
         //----------------------------------------
         // Set references for object components and gameobjects
-        go_pc = GameObject.Find("CDM_TopDownPC");
-        tmp_timeText = GameObject.Find("TimeText").GetComponent<TextMeshProUGUI>();
+        go_pc = GameObject.Find("CDM_TopDownPC"); // The Player Character
+        tmp_timeText = GameObject.Find("TimeText").GetComponent<TextMeshProUGUI>(); // The text mesh pro component attached to a ui GameObject
         //----------------------------------------
         // Get player health from the PC gameobject
         in_pcHP = go_pc.GetComponent<CDM_TopDownPC>().in_hpMax;
-        //----------------------------------------
-        CursorChange(); // Call the function that sets the cursor to a reticule
     }
     //----------------------------------------------------------------------------------------------------
     // Update is called once per frame
@@ -63,13 +68,8 @@ public class CDM_TopDownGameManager : MonoBehaviour
             in_pcHP = go_pc.GetComponent<CDM_TopDownPC>().in_hp; // Update the game managers version of the players hp
         }
         //----------------------------------------
-    }
-    //----------------------------------------------------------------------------------------------------
-    // Function that alters the cursor
-    void CursorChange()
-    {
-        Cursor.lockState = CursorLockMode.Confined; // Lock the cursor to the game window
-        Cursor.SetCursor(tx_cursor, new Vector2(5, -5), CursorMode.Auto); // Change the cursor sprite to a custom reticule and off-set the cursors active point to center on the reticule
+
+        Debug.Log(PlayerPrefs.GetInt("Highscore01"));
     }
     //----------------------------------------------------------------------------------------------------
     // Function that updates the health icons to represent the players current health
@@ -195,13 +195,51 @@ public class CDM_TopDownGameManager : MonoBehaviour
     {
         in_time = Mathf.RoundToInt(fl_gameTime); // Converts the unmodified game time in seconds to the nearest int
         // Calculates score using the formula of: time in seconds + number of Kills (multiplied by five) + number of items colleced (multiplied by two) - the total points of damage the player has taken throughout the game (multiplied by 10)
-        in_score = in_time + (in_kills * 5) + (in_items * 2) - (in_damageTaken * 10);
+        in_score = in_time + (in_kills * 5) + (in_items * 2) - (in_damageTaken * 5);
+        st_score = "Score: " + in_score; // Apply the players score to a string
+        //----------------------------------------
+        // Store Scores
+        if (PlayerPrefs.GetInt("Highscore01") > in_score) // Check if the players score is lower than the first highscore
+        {
+            if (PlayerPrefs.GetInt("Highscore02") > in_score) // Check if the players score is lower than the second highscore
+            {
+                if (PlayerPrefs.GetInt("Highscore03") > in_score) // Check if the players score is lower than the third highscore 
+                {
+                    if (PlayerPrefs.GetInt("Highscore04") > in_score) // Check if the players score is lower than the fourth highscore
+                    {
+                        if (PlayerPrefs.GetInt("Highscore05") < in_score) // Check if the players score is higher than the fifth highscore
+                        {
+                            PlayerPrefs.SetInt("Highscore05", in_score); // Set the fifth highscore to be the players score
+                        }
+                    }
+                    else PlayerPrefs.SetInt("Highscore04", in_score);// If the players score is higher than the fourth highscore set it to be the players score
+                }
+                else PlayerPrefs.SetInt("Highscore03", in_score);// If the players score is higher than the third highscore set it to be the players score
+            }
+            else PlayerPrefs.SetInt("Highscore02", in_score);// If the players score is higher than the second highscore set it to be the players score
+        }
+        else PlayerPrefs.SetInt("Highscore01", in_score);// If the players score is higher than the first highscore set it to be the players score
+        PlayerPrefs.Save(); // Write changes to disk
     }
     //----------------------------------------------------------------------------------------------------
     // Function that governs the end game screen and its functions
     void GameOver()
     {
-        CalcScore(); // Call the score calculation function
-        // Do Stuff
+        if (bl_check == false) // Check a boolian to insure that the GameOver script only runs once
+        {
+            Time.timeScale = 0; // Freeze the game world
+            CalcScore(); // Call the score calculation function
+            //----------------------------------------
+            // Update GameOverScreen
+            go_gameOverScreen.SetActive(true); // Activate the parent object that has all of the Game Over Screen elements childed to it
+            go_scoreText.GetComponent<TextMeshProUGUI>().text = st_score; // Set the Score Text on the Game Over Screen to reflect the calculated score
+            go_highscore01.GetComponent<TextMeshProUGUI>().text = "1: " + PlayerPrefs.GetInt("Highscore01"); // Set the first highscore text object to reflect the corresponding stored highscore
+            go_highscore02.GetComponent<TextMeshProUGUI>().text = "2: " + PlayerPrefs.GetInt("Highscore02"); // Set the second highscore text object to reflect the corresponding stored highscore
+            go_highscore03.GetComponent<TextMeshProUGUI>().text = "3: " + PlayerPrefs.GetInt("Highscore03"); // Set the third highscore text object to reflect the corresponding stored highscore
+            go_highscore04.GetComponent<TextMeshProUGUI>().text = "4: " + PlayerPrefs.GetInt("Highscore04"); // Set the fourth highscore text object to reflect the corresponding stored highscore
+            go_highscore05.GetComponent<TextMeshProUGUI>().text = "5: " + PlayerPrefs.GetInt("Highscore05"); // Set the fi highscore text object to reflect the corresponding stored highscore
+            //----------------------------------------
+            bl_check = true; // Switch boolian
+        }
     }
 }
