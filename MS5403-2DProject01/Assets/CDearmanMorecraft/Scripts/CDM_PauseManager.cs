@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class CDM_PauseManager : MonoBehaviour
 {
-    //----------------------------------------------------------------------------------------------------
+    //====================================================================================================
     // Variables
     public GameObject go_pauseMenu;
     public bool bl_paused = false;
@@ -16,7 +16,7 @@ public class CDM_PauseManager : MonoBehaviour
     {
         CursorChange(); // Call the Cursor Change Function at the start of the scene
     }
-    //----------------------------------------------------------------------------------------------------
+    //====================================================================================================
     // Update is called once per frame
     void Update()
     {
@@ -38,7 +38,7 @@ public class CDM_PauseManager : MonoBehaviour
             }
         }
     }
-    //----------------------------------------------------------------------------------------------------
+    //====================================================================================================
     // Function that alters the cursor
     void CursorChange()
     {
@@ -53,8 +53,9 @@ public class CDM_PauseManager : MonoBehaviour
             Cursor.SetCursor(tx_cursor02, new Vector2(0, 0), CursorMode.Auto); // Change the cursor sprite to a custom cursor with a standard active point
         }
     }
-    //----------------------------------------------------------------------------------------------------
-    //----------------------------------------------------------------------------------------------------
+    //====================================================================================================
+    // Buttons
+    //====================================================================================================
     // Continue Pause Button Function
     public void Continue()
     {
@@ -63,20 +64,20 @@ public class CDM_PauseManager : MonoBehaviour
         bl_paused = false; // Update the paused boolian to reflect the current un-paused state
         CursorChange();// Call the Cursor Change function
     }
-    //----------------------------------------------------------------------------------------------------
+    //====================================================================================================
     // Restart Pause Button Function
     public void Restart()
     {
         Time.timeScale = 1; // Restart time passage in the scene
         SceneManager.LoadScene(1); // Initiate the second scene in the build
     }
-    //----------------------------------------------------------------------------------------------------
+    //====================================================================================================
     // Quit Pause Button Function
     public void QuitToMenu()
     {
         Time.timeScale = 1; // Restart time passage in the scene
         SceneManager.LoadScene(0); // Initiate the first scene in the build
     }
-    //----------------------------------------------------------------------------------------------------
-    //----------------------------------------------------------------------------------------------------
+    //====================================================================================================
+    //====================================================================================================
 }

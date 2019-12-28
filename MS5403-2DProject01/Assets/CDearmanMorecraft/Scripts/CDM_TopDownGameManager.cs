@@ -6,7 +6,7 @@ using TMPro;
 
 public class CDM_TopDownGameManager : MonoBehaviour
 {
-    //----------------------------------------------------------------------------------------------------
+    //====================================================================================================
     // Variables
     private int in_score = 0;
     private int in_minutes = 0;
@@ -42,7 +42,7 @@ public class CDM_TopDownGameManager : MonoBehaviour
 
     private bool bl_check = false;
     public bool bl_gameOver;
-    //----------------------------------------------------------------------------------------------------
+    //====================================================================================================
     // Start is called before the first frame update
     void Start()
     {
@@ -53,8 +53,9 @@ public class CDM_TopDownGameManager : MonoBehaviour
         //----------------------------------------
         // Get player health from the PC gameobject
         in_pcHP = go_pc.GetComponent<CDM_TopDownPC>().in_hpMax;
+        //----------------------------------------
     }
-    //----------------------------------------------------------------------------------------------------
+    //====================================================================================================
     // Update is called once per frame
     void Update()
     {
@@ -68,10 +69,8 @@ public class CDM_TopDownGameManager : MonoBehaviour
             in_pcHP = go_pc.GetComponent<CDM_TopDownPC>().in_hp; // Update the game managers version of the players hp
         }
         //----------------------------------------
-
-        Debug.Log(PlayerPrefs.GetInt("Highscore01"));
     }
-    //----------------------------------------------------------------------------------------------------
+    //====================================================================================================
     // Function that updates the health icons to represent the players current health
     void HealthUpdate()
     {
@@ -157,7 +156,7 @@ public class CDM_TopDownGameManager : MonoBehaviour
             //----------------------------------------
         }
     }
-    //----------------------------------------------------------------------------------------------------
+    //====================================================================================================
     // Function that tracks the time since the beginning of the game and converts it to a clear display
     void Timer()
     {
@@ -188,8 +187,9 @@ public class CDM_TopDownGameManager : MonoBehaviour
             fl_enemyDif += 1; // Increase the global enemy difficulty value
             fl_halfMin = 0; // Reset the time float
         }
+        //----------------------------------------
     }
-    //----------------------------------------------------------------------------------------------------
+    //====================================================================================================
     // Function that calculates the players score based off of time, kills, items, and damage taken
     void CalcScore()
     {
@@ -219,9 +219,11 @@ public class CDM_TopDownGameManager : MonoBehaviour
             else PlayerPrefs.SetInt("Highscore02", in_score);// If the players score is higher than the second highscore set it to be the players score
         }
         else PlayerPrefs.SetInt("Highscore01", in_score);// If the players score is higher than the first highscore set it to be the players score
+        //----------------------------------------
         PlayerPrefs.Save(); // Write changes to disk
+        //----------------------------------------
     }
-    //----------------------------------------------------------------------------------------------------
+    //====================================================================================================
     // Function that governs the end game screen and its functions
     void GameOver()
     {
@@ -240,6 +242,7 @@ public class CDM_TopDownGameManager : MonoBehaviour
             go_highscore05.GetComponent<TextMeshProUGUI>().text = "5: " + PlayerPrefs.GetInt("Highscore05"); // Set the fi highscore text object to reflect the corresponding stored highscore
             //----------------------------------------
             bl_check = true; // Switch boolian
+            //----------------------------------------
         }
     }
 }

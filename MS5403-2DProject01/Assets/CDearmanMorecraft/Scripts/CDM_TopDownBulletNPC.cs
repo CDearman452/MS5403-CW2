@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class CDM_TopDownBulletNPC : MonoBehaviour
 {
-    //----------------------------------------------------------------------------------------------------
+    //====================================================================================================
     // Variables
     private Rigidbody2D rb_bul;
     private GameObject go_target;
     private Vector2 v2_direction;
     public float fl_speed;
-    //----------------------------------------------------------------------------------------------------
+    //====================================================================================================
     // Start is called before the first frame update
     void Start()
     {
@@ -25,8 +25,9 @@ public class CDM_TopDownBulletNPC : MonoBehaviour
         rb_bul.velocity = v2_direction * fl_speed; // Set it as a new velocity, multiplied by the speed variable
         //----------------------------------------
         rb_bul.freezeRotation = true; // Lock the bullets rotation to stop it from occasionally spinning
+        //----------------------------------------
     }
-    //----------------------------------------------------------------------------------------------------
+    //====================================================================================================
     // Called when a collision between two colliders occurs
     private void OnCollisionEnter2D(Collision2D collision)
     {

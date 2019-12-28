@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CDM_TopDownNPCHostile : MonoBehaviour
 {
-    //----------------------------------------------------------------------------------------------------
+    //====================================================================================================
     // Variables
     private bool bl_stunned;
     public bool bl_hit;
@@ -27,7 +27,7 @@ public class CDM_TopDownNPCHostile : MonoBehaviour
     public float fl_baseMoveSpeed;
 
     private int in_hp = 1;
-    //----------------------------------------------------------------------------------------------------
+    //====================================================================================================
     // Start is called before the first frame update
     void Start()
     {
@@ -42,7 +42,7 @@ public class CDM_TopDownNPCHostile : MonoBehaviour
         in_hp = 4 + Mathf.RoundToInt(go_gm.GetComponent<CDM_TopDownGameManager>().fl_enemyDif / 4); // Set health  using formula: 4 + one quarter of Difficulty Level rounded to the nearst whole number
         //----------------------------------------
     }
-    //----------------------------------------------------------------------------------------------------
+    //====================================================================================================
     // Update is called once per frame
     void Update()
     {
@@ -69,7 +69,7 @@ public class CDM_TopDownNPCHostile : MonoBehaviour
         }
         //----------------------------------------
     }
-    //----------------------------------------------------------------------------------------------------
+    //====================================================================================================
     // Triggers when an object enters this objects collider
     private void OnCollisionEnter2D(Collision2D _cl_obj)
     {
@@ -87,7 +87,7 @@ public class CDM_TopDownNPCHostile : MonoBehaviour
             //----------------------------------------
         }
     }
-    //----------------------------------------------------------------------------------------------------
+    //====================================================================================================
     // Function that governs the NPCs behaviour when it has an unblocked line of sight to the player
     void LOSBehaviour()
     {
@@ -100,7 +100,7 @@ public class CDM_TopDownNPCHostile : MonoBehaviour
         rb_npc.velocity = v2_posDif.normalized * fl_moveSpeed; // Apply a force equal to the difference in position between the PC and the NPC reduced to a magnitude of 1 and multiplied by a speed modifier
         //----------------------------------------
     }
-    //----------------------------------------------------------------------------------------------------
+    //====================================================================================================
     // Function that finds a path to a target object that avoids assigned obstacles
     void Pathfind()
     {
