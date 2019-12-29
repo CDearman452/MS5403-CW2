@@ -70,6 +70,7 @@
     <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_TopDownBulletNPC.cs" />
     <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_TopDownCameraTrack.cs" />
     <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_TopDownGameManager.cs" />
+    <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_TopDownNodalSpawn.cs" />
     <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_TopDownNPCHostile.cs" />
     <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_TopDownPC.cs" />
     <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_TopDownReticule.cs" />

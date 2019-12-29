@@ -62,7 +62,7 @@ public class CDM_TopDownGameManager : MonoBehaviour
         Timer(); // Calls the Timer Function
         if (bl_gameOver == true) GameOver(); // Checks a bool that is changed when the player dies, if the bool is true call the function for the game over screen
         //----------------------------------------
-        // Short loop to stop the script running the entire HealthUpdate() function every frame
+        // If statement to stop the script running the entire HealthUpdate() function every frame
         if (in_pcHP != go_pc.GetComponent<CDM_TopDownPC>().in_hp) // Check if a local version of the players hp matches the pc's version
         {
             HealthUpdate(); // Calls the function that updates the health icons
@@ -184,7 +184,7 @@ public class CDM_TopDownGameManager : MonoBehaviour
         fl_halfMin += Time.deltaTime; // Add the time since the start of the frame to a float
         if (fl_halfMin > 30) // If the float is larger than 30 (representing the passage of 30 seconds)
         {
-            fl_enemyDif += 1; // Increase the global enemy difficulty value
+            fl_enemyDif++; // Increase the global enemy difficulty value
             fl_halfMin = 0; // Reset the time float
         }
         //----------------------------------------
