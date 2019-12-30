@@ -11,8 +11,10 @@ GameObject:
   - component: {fileID: 5649288380999066840}
   - component: {fileID: 5649288380999066843}
   - component: {fileID: 5649288380999066845}
-  - component: {fileID: 5649288380999066841}
   - component: {fileID: 8774163104958733652}
+  - component: {fileID: 5649288380999066841}
+  - component: {fileID: 7502404503403967866}
+  - component: {fileID: 8485973417097728283}
   m_Layer: 0
   m_Name: CDM_TopDownHostileNPC
   m_TagString: HostileNPC
@@ -105,24 +107,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5649288380999066841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5649288380999066844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbb14cb21abd0624084f3035bf56ed3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bl_hit: 0
-  go_bulletSource: {fileID: 8840986454225786010}
-  go_bullet: {fileID: 7861876400823744430, guid: 180bce776e825fe40ac37170a6f49b14,
-    type: 3}
-  fl_cooldown: 0.3
-  fl_baseMoveSpeed: 1
 --- !u!68 &8774163104958733652
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -143,6 +127,54 @@ EdgeCollider2D:
   - {x: 0.35, y: 0}
   - {x: -0.4, y: 0.35}
   - {x: -0.4, y: -0.35}
+--- !u!114 &5649288380999066841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5649288380999066844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb14cb21abd0624084f3035bf56ed3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bl_hit: 0
+  go_bulletSource: {fileID: 8840986454225786010}
+  go_bullet: {fileID: 7861876400823744430, guid: 180bce776e825fe40ac37170a6f49b14,
+    type: 3}
+  fl_cooldown: 0.3
+  fl_baseMoveSpeed: 1
+--- !u!114 &7502404503403967866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5649288380999066844}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df3717e3283d12745a285f8a1904d777, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  st_gmName: CDM_TopDownGameManager
+  bl_findPath: 1
+  go_pc: {fileID: 0}
+--- !u!114 &8485973417097728283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5649288380999066844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36819b0044207ba48b005afe88afc9da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  st_gmName: CDM_TopDownGameManager
+  bl_findPath: 1
+  go_pc: {fileID: 0}
 --- !u!1 &8840986454225786010
 GameObject:
   m_ObjectHideFlags: 0

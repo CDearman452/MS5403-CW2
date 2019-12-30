@@ -70,8 +70,9 @@ public class CDM_TopDownNodalSpawn : MonoBehaviour
             //----------------------------------------
             // Calculate the number of enemies to spawn based off of the difficulty level
             fl_enemyDif = GetComponent<CDM_TopDownGameManager>().fl_enemyDif; // Retrieve the enemy difficulty value from the gamemanager script
-            if (fl_enemyDif > 0) in_enemyNum = Mathf.RoundToInt(fl_enemyDif) * 5; // If the difficulty value is larger than zero, the number of enemies to spawn is equal to the difficulty value multiplied by 5
-            else in_enemyNum = 5; // If the difficulty value is smaller than, or equal to, zero the number of enemies to spawn is five
+            if (fl_enemyDif > 0) in_enemyNum = Mathf.RoundToInt(fl_enemyDif) * 3; // If the difficulty value is larger than zero, the number of enemies to spawn is equal to the difficulty value multiplied by 3
+            else in_enemyNum = 3; // If the difficulty value is smaller than, or equal to, zero the number of enemies to spawn is three
+            if (in_enemyNum < 9) in_enemyNum = 9; // Locks the number of enemys that can be spawned at one time to 9 for opimizational issues
             go_randomSpawnNodes = new GameObject[in_enemyNum]; // Set the array representing the randomised nodes that the enemies will spawn at to be the same size as the number of enemies to be spawned
             //----------------------------------------
             // Fill an array with a number of random nodes, from the valid nodes array, equal to the number of enemies to spawn
