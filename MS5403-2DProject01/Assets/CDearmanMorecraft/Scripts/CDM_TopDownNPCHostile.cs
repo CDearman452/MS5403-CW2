@@ -42,13 +42,13 @@ public class CDM_TopDownNPCHostile : MonoBehaviour
         rb_npc = GetComponent<Rigidbody2D>(); // The NPC's rigidbody
         //----------------------------------------
         // Set the target object in the pathfinding script
-        GetComponent<CDM_Pathfind_unoptimized>().go_pc = go_pc;
+        GetComponent<CDM_Pathfind>().go_pc = go_pc;
         //----------------------------------------
         // Set move speed and toughness based on difficulty
         fl_moveSpeed = fl_baseMoveSpeed + (go_gm.GetComponent<CDM_TopDownGameManager>().fl_enemyDif / 2); // Set movement speed using formula: Base + half of Difficulty Level
         in_hp = 4 + Mathf.RoundToInt(go_gm.GetComponent<CDM_TopDownGameManager>().fl_enemyDif / 4); // Set health  using formula: 4 + one quarter of Difficulty Level rounded to the nearst whole number
         //----------------------------------------
-        nd_path = GetComponent<CDM_Pathfind_unoptimized>().nd_path;
+        nd_path = new List<Node>();
         //----------------------------------------
     }
     //====================================================================================================
@@ -75,6 +75,13 @@ public class CDM_TopDownNPCHostile : MonoBehaviour
             bl_stunned = false; // Set stunned check variable to false to 'un-stun' the NPC
             v2_back = new Vector2(transform.position.x, transform.position.y) - new Vector2(go_pc.transform.position.x, go_pc.transform.position.y); // Calculate a knockback vector that defines a position directly away from the PC
             rb_npc.velocity = v2_back.normalized * 10; // Apply that vector, reduced to a magnitude of 1 and multiplied by 10 to give a consistant speed regardless of distance
+        }
+        //----------------------------------------
+        // Check if the player is dead and if so, shut down the npc
+        if (go_pc.activeSelf == false)
+        {
+            GetComponent<CDM_Pathfind>().enabled = false; // Disable the pathfinding script
+            GetComponent<CDM_TopDownNPCHostile>().enabled = false; // Disable this script
         }
         //----------------------------------------
     }
@@ -117,23 +124,26 @@ public class CDM_TopDownNPCHostile : MonoBehaviour
         bool _bl_move = false; // Check for if the NPC needs to move or update its path
         //----------------------------------------
         // If statement block to determine if the NPC is within a short distance of the center of the first node in its path to determin if it should update the path
-        if (transform.position.x >= (nd_path[0].v2_nodePos.x - 0.25f) && transform.position.x <= (nd_path[0].v2_nodePos.x + 0.25f)) // Check if the NPC is within 0.25 units of the node on the x axis
+        if (nd_path.Count > 0) // Check that the path list is not empty
         {
-            if (transform.position.y >= (nd_path[0].v2_nodePos.y - 0.25f) && transform.position.y <= (nd_path[0].v2_nodePos.y + 0.25f)) // Check if the NPC is within 0.25 units of the node on the y axis
+            if (transform.position.x >= (nd_path[0].v2_nodePos.x - 0.25f) && transform.position.x <= (nd_path[0].v2_nodePos.x + 0.25f)) // Check if the NPC is within 0.25 units of the node on the x axis
             {
-                GetComponent<CDM_Pathfind_unoptimized>().bl_findPath = true; // If the NPC is at the first node in it's path, trigger the pathfinding script again so that it updates the path
+                if (transform.position.y >= (nd_path[0].v2_nodePos.y - 0.25f) && transform.position.y <= (nd_path[0].v2_nodePos.y + 0.25f)) // Check if the NPC is within 0.25 units of the node on the y axis
+                {
+                    GetComponent<CDM_Pathfind>().bl_findPath = true; // If the NPC is at the first node in it's path, trigger the pathfinding script again so that it updates the path
+                }
+                else if (transform.position.y >= (nd_path[0].v2_nodePos.y + 2) || transform.position.y <= (nd_path[0].v2_nodePos.y - 2)) // Check if the NPC is 2 units away from the node on the y axis
+                {
+                    GetComponent<CDM_Pathfind>().bl_findPath = true; // If the NPC is too far away from the first node in it's path, trigger the pathfinding script agains so that it updates the path
+                }
+                else _bl_move = true; // If the NPC is not within range of the node on the y axis switch the bool that determines if the NPC needs to move
             }
-            else if (transform.position.y >= (nd_path[0].v2_nodePos.y + 2) || transform.position.y <= (nd_path[0].v2_nodePos.y -2)) // Check if the NPC is 2 units away from the node on the y axis
+            else if (transform.position.x >= (nd_path[0].v2_nodePos.x + 2) || transform.position.x <= (nd_path[0].v2_nodePos.x - 2)) // Check if the NPC is 2 units away from the node on the x axis
             {
-                GetComponent<CDM_Pathfind_unoptimized>().bl_findPath = true; // If the NPC is too far away from the first node in it's path, trigger the pathfinding script agains so that it updates the path
+                GetComponent<CDM_Pathfind>().bl_findPath = true; // If the NPC is too far away from the first node in it's path, trigger the pathfinding script agains so that it updates the path
             }
-            else _bl_move = true; // If the NPC is not within range of the node on the y axis switch the bool that determines if the NPC needs to move
+            else _bl_move = true; // If the NPC is not within range of the node on the x axis switch the bool that determines if the NPC needs to move
         }
-        else if (transform.position.x >= (nd_path[0].v2_nodePos.x + 2) || transform.position.x <= (nd_path[0].v2_nodePos.x - 2)) // Check if the NPC is 2 units away from the node on the x axis
-        {
-            GetComponent<CDM_Pathfind_unoptimized>().bl_findPath = true; // If the NPC is too far away from the first node in it's path, trigger the pathfinding script agains so that it updates the path
-        }
-        else _bl_move = true; // If the NPC is not within range of the node on the x axis switch the bool that determines if the NPC needs to move
         //----------------------------------------
         // Movement between nodes
         if (_bl_move)

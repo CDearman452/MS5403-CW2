@@ -1,8 +1,12 @@
-﻿using System.Collections;
+﻿//====================================================================================================
+// ATTENTION --- A* Scripting referenced from Sebastian Lagues youtube series covering the topic
+// Link --- https://www.youtube.com/playlist?list=PLFt_AvWsXl0cq5Umv3pMC9SPnKjfp9eGW
+//====================================================================================================
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Node : IHeapItem<Node> // New class for defining a 'node' to create an information repository for the A* algorithm. Also impliments the interface from the Heap Optimization script with a type Node
+public class Node // New class for defining a 'node' to create an information repository for the A* algorithm
 {
     //====================================================================================================
     // Variables
@@ -12,12 +16,12 @@ public class Node : IHeapItem<Node> // New class for defining a 'node' to create
 
     public Node nd_previous;
 
-    int heapIndex;
     public int in_gCost; // Distance from Start Point
     public int in_hCost; // Distance from End Point
     public int in_gridPosX;
     public int in_gridPosY;
-
+    //====================================================================================================
+    // Class Contruction
     public Node(bool _nodeFree, Vector2 _nodePos, int _gridPosX, int _gridPosY) // Class constructor for Nodes
     {
         //----------------------------------------
@@ -28,36 +32,13 @@ public class Node : IHeapItem<Node> // New class for defining a 'node' to create
         in_gridPosY = _gridPosY;
         //----------------------------------------
     }
-
+    //====================================================================================================
+    // Reference int for retrieving the fCost of the node (The combined distance value from the origin node and from the target node
     public int in_fCost
     {
-        get
+        get // Can be retrieved but not set
         {
-            return in_gCost + in_hCost;
+            return in_gCost + in_hCost; // returns the nodes gCost + its hCost
         }
-    }
-
-    public int HeapIndex
-    {
-        get
-        {
-            return heapIndex;
-        }
-        set
-        {
-            heapIndex = value;
-        }
-    }
-
-    public int CompareTo(Node nodeToCompare)
-    {
-        int _comparisonValue = in_fCost.CompareTo(nodeToCompare.in_fCost);
-
-        if (_comparisonValue == 0)
-        {
-            _comparisonValue = in_hCost.CompareTo(nodeToCompare.in_hCost);
-        }
-
-        return -_comparisonValue;
     }
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - HostileNPC
   - Bullet
+  - HealthPickup
   layers:
   - Default
   - TransparentFX

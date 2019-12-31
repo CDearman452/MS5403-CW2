@@ -64,12 +64,9 @@ public class CDM_TopDownPC : MonoBehaviour
         }
         else if (_col.transform.tag == "HealthPickup")
         {
+            _col.transform.GetComponent<CDM_HealthPickup>().bl_destroy = true; // Destroy the health pickup gameobject
             in_id = 1; // Set an ID value to identify the collision as a health pickup
             HP(); // Call the HP governing function
-        }
-        else if (_col.transform.tag == "Powerup")
-        {
-            //Do Shit
         }
     }
     //----------------------------------------------------------------------------------------------------
@@ -125,7 +122,7 @@ public class CDM_TopDownPC : MonoBehaviour
         }
         else if (in_id == 1) // Check the assigned ID of the collided object to see if it is a health pickup   
         {
-            if (in_hp > in_hpMax) in_hp++; // Increase the players health if it is smaller than the hp max
+            if (in_hp < in_hpMax) in_hp++; // Increase the players health if it is smaller than the hp max
             go_gm.GetComponent<CDM_TopDownGameManager>().in_items++;// Increase the int in the game manager that tracks how many items that the player has picked up for scoring purposes
         }
         //----------------------------------------

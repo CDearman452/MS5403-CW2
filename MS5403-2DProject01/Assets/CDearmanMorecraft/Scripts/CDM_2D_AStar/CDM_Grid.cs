@@ -1,4 +1,8 @@
-﻿using System.Collections;
+﻿//====================================================================================================
+// ATTENTION --- A* Scripting referenced from Sebastian Lagues youtube series covering the topic
+// Link --- https://www.youtube.com/playlist?list=PLFt_AvWsXl0cq5Umv3pMC9SPnKjfp9eGW
+//====================================================================================================
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -79,31 +83,39 @@ public class CDM_Grid : MonoBehaviour
         //----------------------------------------
     }
     //====================================================================================================
-    //
+    // Public method for lists of nodes which returns the neighboring nodes of the input node
     public List<Node> GetNeighbours(Node _node)
     {
+        //----------------------------------------
+        // Initialize a list of nodes to fill with neighbours
         List<Node> nd_neighbours = new List<Node>();
-        
+        //----------------------------------------
+        // For loops which evaluates 9 total nodes, each within 1 on the x and/or the y axis
         for (int x = -1; x <=1; x++)
         {
             for (int y = -1; y <= 1; y++)
             {
+                //----------------------------------------
+                // Check if the node being evaluated is the same node that was input
                 if (x == 0 && y ==0 ) continue;
-
+                //----------------------------------------
+                // Set temp variables to represent the x and y position of the node being evaluated using the loop iteration and the x and y position of the input node
                 int _in_checkX = _node.in_gridPosX + x;
                 int _in_checkY = _node.in_gridPosY + y;
-
+                //----------------------------------------
+                // Check if the node being evaluated is within the grid
                 if (_in_checkX >= 0 && _in_checkX < in_gridSizeX && _in_checkY >= 0 && _in_checkY < in_gridSizeY)
                 {
-                    nd_neighbours.Add(nd_grid[_in_checkX, _in_checkY]);
+                    nd_neighbours.Add(nd_grid[_in_checkX, _in_checkY]); // Add the node being evaluated to the list of neighbours
                 }
             }
         }
-
+        //----------------------------------------
+        // Return the list of neighbours once it is full
         return nd_neighbours;
     }
     //====================================================================================================
-    //
+    // Public interger that can be retrieved as an extension of the grid and returns the total number of nodes within the grid
     public int MaxSize
     {
         get
@@ -112,38 +124,54 @@ public class CDM_Grid : MonoBehaviour
         }
     }
     //====================================================================================================
-    // Testing stuff - Get the hell rid of it before building
+    // Path & grid visualization using gizmos
     void OnDrawGizmos()
     {
+        //----------------------------------------
+        // Draw a cube with the size of the grid
         Gizmos.DrawWireCube(transform.position, new Vector2(v2_gridSize.x, v2_gridSize.y));
+        //----------------------------------------
+        // Check if the boolian determining if only the path is drawn returns true
         if (bl_drawPathOnly)
         {
-            if (nd_path != null)
+            if (nd_path != null) // Check that the path list isn't empty
             {
-                foreach (Node n in nd_path)
+                foreach (Node n in nd_path) // For every node in the list
                 {
+                    //----------------------------------------
+                    // Draw a cyan wireframe sphere with the position of the node
                     Gizmos.color = Color.cyan;
                     Gizmos.DrawWireSphere(n.v2_nodePos, fl_nodeDiameter / 2);
+                    //----------------------------------------
                 }
             }
         }
-        else
+        else // If the boolian determining if only the path is drawn returns false
         {
-            if (nd_grid != null)
+            if (nd_grid != null) // Check that the path array isn't empty
             {
+                //----------------------------------------
+                // Create a node to represent the PC
                 Node nd_pc = NodeFromWorldPoint(new Vector2(go_pc.transform.position.x, go_pc.transform.position.y));
-
+                //----------------------------------------
+                // For every node in the grid array
                 foreach (Node n in nd_grid)
                 {
-                    if (n.bl_nodeFree) Gizmos.color = Color.green;
-                    else Gizmos.color = Color.red;
-                    if (nd_pc == n) Gizmos.color = Color.blue;
-
-                    if (nd_path != null)
+                    //----------------------------------------
+                    // Colour the node being evaluated
+                    if (n.bl_nodeFree) Gizmos.color = Color.green; // If the node is in a free position colour the node green
+                    else Gizmos.color = Color.red; // If the node is in the same position as a wall, colour it red
+                    if (nd_pc == n) Gizmos.color = Color.blue; // if the node is in the same position as the pc draw the node blue
+                    //----------------------------------------
+                    // Colour the path
+                    if (nd_path != null) // Check that the path list is not empty
                     {
-                        if (nd_path.Contains(n)) Gizmos.color = Color.cyan;
+                        if (nd_path.Contains(n)) Gizmos.color = Color.cyan; // If the node being evaluated is in the path list of nodes colour it cyan
                     }
+                    //----------------------------------------
+                    // Draw a wiresphere with the colour determined above, in the position of the node being evaluated
                     Gizmos.DrawWireSphere(n.v2_nodePos, fl_nodeDiameter / 2);
+                    //----------------------------------------
                 }
             }
         }

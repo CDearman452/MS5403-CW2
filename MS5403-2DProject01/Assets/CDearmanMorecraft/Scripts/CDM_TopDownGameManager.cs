@@ -198,7 +198,7 @@ public class CDM_TopDownGameManager : MonoBehaviour
         in_score = in_time + (in_kills * 5) + (in_items * 2) - (in_damageTaken * 5);
         st_score = "Score: " + in_score; // Apply the players score to a string
         //----------------------------------------
-        // Store Scores
+        // Update and Store Scores
         if (PlayerPrefs.GetInt("Highscore01") > in_score) // Check if the players score is lower than the first highscore
         {
             if (PlayerPrefs.GetInt("Highscore02") > in_score) // Check if the players score is lower than the second highscore
@@ -211,14 +211,36 @@ public class CDM_TopDownGameManager : MonoBehaviour
                         {
                             PlayerPrefs.SetInt("Highscore05", in_score); // Set the fifth highscore to be the players score
                         }
+                    }//----------------------------------------
+                    else // If the players score is higher than the fourth highscore
+                    {
+                        PlayerPrefs.SetInt("Highscore05", PlayerPrefs.GetInt("Highscore04")); // Shift the fourth highscore down to the fith highscore
+                        PlayerPrefs.SetInt("Highscore04", in_score); // Set the fourth highscore to be the players score
                     }
-                    else PlayerPrefs.SetInt("Highscore04", in_score);// If the players score is higher than the fourth highscore set it to be the players score
+                }//----------------------------------------
+                else // If the players score is higher than the third highscore
+                {
+                    PlayerPrefs.SetInt("Highscore05", PlayerPrefs.GetInt("Highscore04")); // Shift the fourth highscore down to the fith highscore
+                    PlayerPrefs.SetInt("Highscore04", PlayerPrefs.GetInt("Highscore03")); // Shift the third highscore down to the fourth highscore
+                    PlayerPrefs.SetInt("Highscore03", in_score); // Set the third highscore to be the players score
                 }
-                else PlayerPrefs.SetInt("Highscore03", in_score);// If the players score is higher than the third highscore set it to be the players score
+            }//----------------------------------------
+            else // If the players score is higher than the second highscore
+            {
+                PlayerPrefs.SetInt("Highscore05", PlayerPrefs.GetInt("Highscore04")); // Shift the fourth highscore down to the fith highscore
+                PlayerPrefs.SetInt("Highscore04", PlayerPrefs.GetInt("Highscore03")); // Shift the third highscore down to the fourth highscore
+                PlayerPrefs.SetInt("Highscore03", PlayerPrefs.GetInt("Highscore02")); // Shift the second highscore down to the third highscore
+                PlayerPrefs.SetInt("Highscore02", in_score); // Set the second highscore to be the players score
             }
-            else PlayerPrefs.SetInt("Highscore02", in_score);// If the players score is higher than the second highscore set it to be the players score
+        }//----------------------------------------
+        else // If the players score is higher than the first highscore
+        {
+            PlayerPrefs.SetInt("Highscore05", PlayerPrefs.GetInt("Highscore04")); // Shift the fourth highscore down to the fith highscore
+            PlayerPrefs.SetInt("Highscore04", PlayerPrefs.GetInt("Highscore03")); // Shift the third highscore down to the fourth highscore
+            PlayerPrefs.SetInt("Highscore03", PlayerPrefs.GetInt("Highscore02")); // Shift the second highscore down to the third highscore
+            PlayerPrefs.SetInt("Highscore02", PlayerPrefs.GetInt("Highscore01")); // Shift the first highscore down to the second highscore
+            PlayerPrefs.SetInt("Highscore01", in_score); // Set the first highscore to be the players score
         }
-        else PlayerPrefs.SetInt("Highscore01", in_score);// If the players score is higher than the first highscore set it to be the players score
         //----------------------------------------
         PlayerPrefs.Save(); // Write changes to disk
         //----------------------------------------

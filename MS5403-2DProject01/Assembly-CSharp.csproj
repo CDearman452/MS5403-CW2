@@ -63,16 +63,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_2D_AStar\CDM_Grid.cs" />
-    <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_2D_AStar\CDM_Heap.cs" />
     <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_2D_AStar\CDM_Node.cs" />
     <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_2D_AStar\CDM_Pathfind.cs" />
-    <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_2D_AStar\CDM_Pathfind_HeapOpt.cs" />
-    <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_2D_AStar\CDM_Pathfind_unoptimized.cs" />
+    <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_HealthPickup.cs" />
     <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_MainMenu.cs" />
     <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_PauseManager.cs" />
     <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_TopDownBullet.cs" />
     <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_TopDownBulletNPC.cs" />
     <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_TopDownCameraTrack.cs" />
+    <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_TopDownCrate.cs" />
     <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_TopDownGameManager.cs" />
     <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_TopDownNodalSpawn.cs" />
     <Compile Include="Assets\CDearmanMorecraft\Scripts\CDM_TopDownNPCHostile.cs" />
